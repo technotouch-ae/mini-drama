@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>المليونير المتخفّي | The Undercover Millionaire</title>
+<meta name="description" content="مسلسل قصير عمودي باللهجة الخليجية من إنتاج TECHNOTOUCH METALS TRADING L.L.C - دبي">
+<style>
+  :root { --bg:#0d0d10; --card:#18181d; --text:#f3f1ec; --muted:#a8a49b; --gold:#e3b341; --line:#2a2a31; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:"Segoe UI",Tahoma,Arial,sans-serif; line-height:1.6; }
+  header { padding:28px 16px 12px; text-align:center; }
+  h1 { margin:0; font-size:30px; color:var(--gold); }
+  .sub { color:var(--muted); font-size:14px; margin-top:4px; }
+  main { max-width:960px; margin:0 auto; padding:0 16px 40px; }
+  .stage { display:flex; gap:20px; flex-wrap:wrap; justify-content:center; align-items:flex-start; margin-top:12px; }
+  .player { width:100%; max-width:360px; }
+  video { width:100%; aspect-ratio:9/16; background:#000; border-radius:14px; display:block; }
+  .now { text-align:center; margin:8px 0 0; font-weight:600; }
+  .list { flex:1; min-width:260px; display:grid; gap:10px; }
+  .ep { display:flex; gap:12px; align-items:center; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:8px; cursor:pointer; color:inherit; text-align:right; font:inherit; width:100%; }
+  .ep img { width:64px; height:114px; object-fit:cover; border-radius:8px; flex:none; }
+  .ep.on { border-color:var(--gold); }
+  .ep b { display:block; }
+  .ep span { color:var(--muted); font-size:13px; }
+  section { margin-top:36px; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px; }
+  h2 { margin:0 0 8px; font-size:20px; color:var(--gold); }
+  .en { direction:ltr; text-align:left; color:var(--muted); font-size:14px; margin-top:10px; }
+  footer { text-align:center; color:var(--muted); font-size:12px; padding:20px 16px 30px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>المليونير المتخفّي</h1>
+  <div class="sub">The Undercover Millionaire · مسلسل قصير عمودي باللهجة الخليجية</div>
+</header>
+<main>
+  <div class="stage">
+    <div class="player">
+      <video id="v" controls playsinline preload="metadata" poster="episodes/ep1.jpg" src="episodes/ep1.mp4"></video>
+      <p class="now" id="now">الحلقة 1 - آخر ليلة</p>
+    </div>
+    <div class="list" id="list"></div>
+  </div>
+
+  <section>
+    <h2>القصة</h2>
+    <p>كريم الراشد، وريث عائلة غنية، صدم سيارة وهرب. أبوه عاقبه: سنة كاملة يعيش فقير ويشتغل سائق توصيل. وبهالسنة حبّ ليلى… أخت الشاب اللي صدمه، وهي ما تعرف الحقيقة.</p>
+    <p class="en">Karim Al-Rashed, heir of a wealthy family, causes a hit-and-run. His father sentences him to live one full year as a poor delivery driver. During that year he falls in love with Layla – the sister of the young man he hurt – who does not know the truth.</p>
+  </section>
+
+  <section>
+    <h2>عن الشركة · About</h2>
+    <p>من إنتاج ونشر <b>TECHNOTOUCH METALS TRADING L.L.C</b> (تكنوتج لتجارة المعادن ذ.م.م)، دبي، الإمارات العربية المتحدة، تأسست سنة 2021. إلى جانب تجارة المعادن، الشركة بتنتج وبتنشر محتوى رقمي: ألعاب مصغّرة ومسلسلات قصيرة عمودية للجمهور العربي.</p>
+    <p class="en">Produced and published by <b>TECHNOTOUCH METALS TRADING L.L.C</b>, Dubai, United Arab Emirates (established 2021). Besides metals trading, the company develops and publishes digital entertainment: mini games and vertical short-form drama series for Arabic-speaking audiences. All rights reserved.</p>
+  </section>
+</main>
+<footer>© 2026 TECHNOTOUCH METALS TRADING L.L.C · Dubai, UAE · جميع الحقوق محفوظة</footer>
+<script>
+  const eps = [
+    { t: 'الحلقة 1 - آخر ليلة', d: 'آخر ليلة لكريم كسائق توصيل… والإهانة الأخيرة' },
+    { t: 'الحلقة 2 - الاجتماع', d: 'رئيس مجموعة الراشد… هو نفسه شب التوصيل' },
+    { t: 'الحلقة 3 - السر', d: 'قبل سنتين: القهوة، السهرة، والحادث' },
+    { t: 'الحلقة 4 - الرفض', d: 'ليلى بترفض مساعدته… ورامي بيدوّر على ماضيه' },
+  ];
+  const v = document.getElementById('v'), now = document.getElementById('now'), list = document.getElementById('list');
+  function play(i, auto) {
+    v.src = 'episodes/ep' + (i + 1) + '.mp4';
+    v.poster = 'episodes/ep' + (i + 1) + '.jpg';
+    now.textContent = eps[i].t;
+    [...list.children].forEach((b, j) => b.classList.toggle('on', j === i));
+    if (auto) v.play().catch(() => {});
+  }
+  eps.forEach((e, i) => {
+    const b = document.createElement('button');
+    b.className = 'ep' + (i === 0 ? ' on' : '');
+    b.innerHTML = '<img src="episodes/ep' + (i + 1) + '.jpg" alt=""><div><b>' + e.t + '</b><span>' + e.d + '</span></div>';
+    b.onclick = () => play(i, true);
+    list.appendChild(b);
+  });
+  v.addEventListener('ended', () => {
+    const i = eps.findIndex(e => e.t === now.textContent);
+    if (i > -1 && i < eps.length - 1) play(i + 1, true);
+  });
+</script>
+</body>
+</html>
